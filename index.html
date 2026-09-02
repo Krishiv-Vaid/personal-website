@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Krishiv Vaid</title>
+  <meta
+    name="description"
+    content="Krishiv Vaid — math and physics student at the University of Waterloo interested in software engineering, machine learning, mathematics, and building things."
+  >
+  <meta name="theme-color" content="#191b2a">
+
+  <meta property="og:title" content="Krishiv Vaid">
+  <meta
+    property="og:description"
+    content="Krishiv Vaid — math and physics student at the University of Waterloo interested in software engineering, machine learning, mathematics, and building things."
+  >
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        const initialTheme = savedTheme ||
+          (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.dataset.theme = initialTheme;
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    })();
+  </script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <div class="site-shell">
+    <header class="site-header site-header--home">
+      <h1 class="site-name" id="page-title">Krishiv Vaid</h1>
+
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Primary navigation">
+        <a class="nav-link nav-link--primary" href="blog.html">Blog</a>
+      </nav>
+
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        type="button"
+        aria-label="Switch to light mode"
+        title="Switch to light mode"
+      >
+        <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.25" fill="currentColor"/>
+          <path
+            d="M12 2v2.65M12 19.35V22M2 12h2.65M19.35 12H22M4.93 4.93l1.87 1.87M17.2 17.2l1.87 1.87M19.07 4.93 17.2 6.8M6.8 17.2l-1.87 1.87"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        </svg>
+        <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <mask id="moon-cutout">
+              <rect width="24" height="24" fill="white"/>
+              <circle cx="15.9" cy="8.25" r="7.25" fill="black"/>
+            </mask>
+          </defs>
+          <circle cx="11.4" cy="12.3" r="8.6" fill="currentColor" mask="url(#moon-cutout)"/>
+        </svg>
+      </button>
+      </div>
+    </header>
+
+    <main>
+      <article class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p>Hi, I&rsquo;m Krish.</p>
+
+          <p>
+            I&rsquo;m a math and physics student at the
+            <a href="https://uwaterloo.ca/" target="_blank" rel="noopener noreferrer">University of Waterloo</a>
+            interested in software engineering, machine learning, mathematics, and building things.
+          </p>
+
+          <p>
+            Previously, I worked as a software engineer at
+            Orangutany
+            (a startup), and as a Research Assistant in the
+            <a href="https://www.mathematics.utoronto.ca/" target="_blank" rel="noopener noreferrer">Department of Mathematics</a>
+            at the <a href="https://www.utoronto.ca/" target="_blank" rel="noopener noreferrer">University of Toronto</a>.
+          </p>
+
+          <p>
+            I&rsquo;m also working on my own startup, Cyron.
+          </p>
+
+          <p>
+            I love reading, writing, and working on technical problems! In my free time, you&rsquo;ll probably find me working on a project or playing chess.
+          </p>
+        </div>
+
+        <ul class="link-list" aria-label="Personal links">
+          <li>
+            <a class="icon-link" href="mailto:kvaid@uwaterloo.ca">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.25" y="5.35" width="17.5" height="13.3" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                <path d="m4.15 6.35 7.85 6.4 7.85-6.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              <span>kvaid@uwaterloo.ca</span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="icon-link"
+              href="https://www.linkedin.com/in/krishiv-vaid/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn (opens in a new tab)"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M20.45 3H3.55A.55.55 0 0 0 3 3.55v16.9c0 .3.25.55.55.55h16.9c.3 0 .55-.25.55-.55V3.55a.55.55 0 0 0-.55-.55ZM8.34 18.34H5.67V9.75h2.67v8.59ZM7 8.58a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1Zm11.34 9.76h-2.66v-4.18c0-1-.02-2.28-1.39-2.28-1.39 0-1.6 1.08-1.6 2.2v4.26h-2.66V9.75h2.55v1.17h.04c.36-.67 1.22-1.38 2.52-1.38 2.69 0 3.2 1.77 3.2 4.08v4.72Z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="icon-link"
+              href="https://github.com/Krishiv-Vaid"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub (opens in a new tab)"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 2.15a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.54 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.55 9.55 0 0 1 12 7.17c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.86v2.54c0 .27.18.58.69.48A10 10 0 0 0 12 2.15Z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="icon-link"
+              href="https://x.com/Krishiv_V22"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (opens in a new tab)"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M4.25 3h4.2l4.63 6.21L18.36 3h1.9l-6.3 7.43L21 21h-4.2l-4.96-6.66L6.18 21h-1.9l6.67-7.87L4.25 3Zm3.25 1.52 10.08 14.96h1.67L9.17 4.52H7.5Z"/>
+              </svg>
+              <span>X</span>
+            </a>
+          </li>
+
+          <li class="website-item">
+            <button class="icon-link text-link" id="website-link" type="button" aria-describedby="website-message">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.8" fill="none" stroke="currentColor" stroke-width="1.75"/>
+                <path d="M3.4 12h17.2M12 3.2c2.2 2.3 3.4 5.2 3.4 8.8s-1.2 6.5-3.4 8.8c-2.2-2.3-3.4-5.2-3.4-8.8S9.8 5.5 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.55"/>
+              </svg>
+              <span>Website</span>
+            </button>
+            <span class="surprise-message" id="website-message" role="status" aria-live="polite"></span>
+          </li>
+        </ul>
+      </article>
+    </main>
+  </div>
+</body>
+</html>

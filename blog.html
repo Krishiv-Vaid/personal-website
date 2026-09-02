@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Blog | Krishiv Vaid</title>
+  <meta name="description" content="My Thoughts by Krishiv Vaid. Coming soon.">
+  <meta name="theme-color" content="#191b2a">
+
+  <meta property="og:title" content="My Thoughts — Krishiv Vaid">
+  <meta property="og:description" content="My Thoughts by Krishiv Vaid. Coming soon.">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        const initialTheme = savedTheme ||
+          (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.dataset.theme = initialTheme;
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    })();
+  </script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <div class="site-shell">
+    <header class="site-header site-header--home">
+      <h1 class="site-name" id="page-title">My Thoughts...</h1>
+
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a class="nav-link nav-link--primary nav-link--home" href="index.html">Home</a>
+        </nav>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Switch to light mode"
+          title="Switch to light mode"
+        >
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.25" fill="currentColor"/>
+            <path
+              d="M12 2v2.65M12 19.35V22M2 12h2.65M19.35 12H22M4.93 4.93l1.87 1.87M17.2 17.2l1.87 1.87M19.07 4.93 17.2 6.8M6.8 17.2l-1.87 1.87"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <mask id="moon-cutout">
+                <rect width="24" height="24" fill="white"/>
+                <circle cx="15.9" cy="8.25" r="7.25" fill="black"/>
+              </mask>
+            </defs>
+            <circle cx="11.4" cy="12.3" r="8.6" fill="currentColor" mask="url(#moon-cutout)"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="writing" aria-labelledby="page-title">
+        <p class="writing-subtitle">Coming soon!</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
