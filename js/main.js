@@ -1,102 +1,50 @@
 (() => {
-  "use strict";
-
-  const THEME_KEY = "theme";
-  const themeToggle = document.querySelector("#theme-toggle");
-  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-
-  const themeColors = {
-    dark: "#191b2a",
-    light: "#eef0f5"
-  };
-
-  function currentTheme() {
-    return document.documentElement.dataset.theme === "light" ? "light" : "dark";
+  'use strict';
+  const root = document.documentElement;
+  const toggle = document.querySelector('#theme-toggle');
+  const system = matchMedia('(prefers-color-scheme: dark)');
+  let manual = false;
+  try { manual = ['light', 'dark'].includes(localStorage.getItem('theme')); } catch {}
+  function sync() {
+    const dark = root.dataset.theme === 'dark';
+    toggle.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} mode`);
+    toggle.title = toggle.getAttribute('aria-label');
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#111111' : '#fafafa';
   }
-
-  function syncThemeUI(theme) {
-    if (themeColorMeta) {
-      themeColorMeta.setAttribute("content", themeColors[theme]);
-    }
-
-    if (themeToggle) {
-      const nextTheme = theme === "dark" ? "light" : "dark";
-      themeToggle.setAttribute(
-        "aria-label",
-        `Switch to ${nextTheme} mode`
-      );
-      themeToggle.setAttribute(
-        "title",
-        `Switch to ${nextTheme} mode`
-      );
-    }
+  toggle.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    manual = true;
+    try { localStorage.setItem('theme', root.dataset.theme); } catch {}
+    sync();
+  });
+  system.addEventListener('change', () => { if (!manual) { root.dataset.theme = system.matches ? 'dark' : 'light'; sync(); } });
+  sync();
+  document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+  const dialog = document.querySelector('#lightbox');
+  let opener;
+  document.querySelectorAll('[data-photo]').forEach(el => el.addEventListener('click', event => {
+    if (!dialog.showModal) return;
+    event.preventDefault(); opener = el;
+    dialog.querySelector('img').src = el.href;
+    dialog.querySelector('img').alt = el.querySelector('img').alt;
+    dialog.querySelector('p').textContent = el.dataset.caption;
+    dialog.showModal();
+  }));
+  dialog.querySelector('.close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => opener?.focus());
+  const counter = document.querySelector('[data-counter]');
+  if (!counter || !counter.dataset.counter || window.__krishCounterRequested) return;
+  function increment() {
+    if (window.__krishCounterRequested) return;
+    window.__krishCounterRequested = true;
+    counter.textContent = 'Counting this visit…';
+    fetch(counter.dataset.counter, { method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', signal: AbortSignal.timeout(8000) })
+      .then(response => { if (!response.ok) throw new Error('Counter unavailable'); return response.json(); })
+      .then(data => { if (!Number.isSafeInteger(data.count) || data.count < 1) throw new Error('Invalid count'); counter.textContent = `${data.count.toLocaleString()} visits`; })
+      .catch(() => { counter.textContent = 'Visit count temporarily unavailable.'; });
   }
-
-  function applyTheme(theme, persist = true) {
-    const safeTheme = theme === "light" ? "light" : "dark";
-    document.documentElement.dataset.theme = safeTheme;
-    syncThemeUI(safeTheme);
-
-    if (persist) {
-      try {
-        localStorage.setItem(THEME_KEY, safeTheme);
-      } catch {
-        // Theme switching still works if storage is unavailable.
-      }
-    }
-  }
-
-  syncThemeUI(currentTheme());
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      applyTheme(currentTheme() === "dark" ? "light" : "dark");
-    });
-  }
-
-  const websiteLink = document.querySelector("#website-link");
-  const websiteMessage = document.querySelector("#website-message");
-
-  function hideWebsiteMessage() {
-    if (!websiteMessage) return;
-
-    websiteMessage.classList.remove("is-visible");
-    window.setTimeout(() => {
-      if (!websiteMessage.classList.contains("is-visible")) {
-        websiteMessage.textContent = "";
-      }
-    }, 180);
-  }
-
-  function showWebsiteMessage() {
-    if (!websiteMessage) return;
-
-    websiteMessage.textContent = "Surprise! You’re already here.";
-    websiteMessage.classList.add("is-visible");
-  }
-
-  if (websiteLink && websiteMessage) {
-    websiteLink.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      if (websiteMessage.classList.contains("is-visible")) {
-        hideWebsiteMessage();
-        return;
-      }
-
-      showWebsiteMessage();
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!event.target.closest(".website-item")) {
-        hideWebsiteMessage();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        hideWebsiteMessage();
-      }
-    });
-  }
+  // Prerendering is not a visit. Normal loads and refreshes each send one POST.
+  if (document.prerendering) document.addEventListener('prerenderingchange', increment, { once: true });
+  else increment();
 })();

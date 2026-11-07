@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "double-pendulum",
+    "name": "Double pendulum",
+    "category": "software",
+    "description": "Exploring chaotic motion with a simulation built from Lagrangian equations of motion.",
+    "stack": [
+      "Python",
+      "NumPy",
+      "SciPy",
+      "Matplotlib"
+    ],
+    "repository": "https://github.com/Krishiv-Vaid/double-pendulum",
+    "demo": null,
+    "images": [],
+    "sections": [
+      {
+        "title": "What it does",
+        "text": "Simulates and visualizes a double pendulum, with energy tracking to check numerical accuracy."
+      },
+      {
+        "title": "Implementation",
+        "text": "The project includes RK4, RK45, and DOP853 integration, plus tools for examining how nearby initial conditions evolve."
+      },
+      {
+        "title": "Testing & analysis",
+        "text": "Energy tracking, Lyapunov estimates, and Poincar\u00e9 sections connect the animated motion to numerical checks. The repository includes reproducible configurations and tests."
+      }
+    ]
+  },
+  {
+    "slug": "lattice",
+    "name": "lattice",
+    "category": "software",
+    "description": "An automatic differentiation engine, built from the ground up to understand how gradients flow.",
+    "stack": [
+      "Python",
+      "C++17"
+    ],
+    "repository": "https://github.com/Krishiv-Vaid/lattice",
+    "demo": null,
+    "images": [],
+    "sections": [
+      {
+        "title": "What it does",
+        "text": "Builds reverse-mode automatic differentiation from scalar values through tensors and neural-network components."
+      },
+      {
+        "title": "Implementation",
+        "text": "Includes SGD and Adam optimizers and an MNIST multilayer perceptron example. The tensor core is being ported to C++17 with shared-storage views."
+      },
+      {
+        "title": "Testing",
+        "text": "Gradients are checked against finite differences and PyTorch."
+      }
+    ]
+  }
+]
