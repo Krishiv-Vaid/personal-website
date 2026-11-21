@@ -27,9 +27,24 @@
       document.documentElement.dataset.theme = t;
     })();
   </script>
+  <!-- Count the visit before CSS and fonts load; main.js renders the result. -->
+  <script>
+    window.__visit = (function () {
+      var url = 'COUNTER_URL';
+      function go(retry) {
+        return fetch(url, { method: 'POST', credentials: 'omit', cache: 'no-store' })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function (d) { return d.count; })
+          .catch(function (e) { if (retry) throw e; return new Promise(function (ok) { setTimeout(ok, 300); }).then(function () { return go(true); }); });
+      }
+      if (document.prerendering) return new Promise(function (ok) { document.addEventListener('prerenderingchange', function () { ok(go()); }, { once: true }); });
+      return go();
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&text=%E0%A4%95%E0%A5%83%E0%A4%B7%E0%A4%BF%E0%A4%B5%20%E0%A4%B5%E0%A5%88%E0%A4%A6&display=swap">
   <link rel="stylesheet" href="/css/styles.css">
   <script src="/js/main.js" defer></script>
 </head>
@@ -39,10 +54,7 @@
   <header class="top">
     <div class="wrap top-inner">
       <a class="brand" href="/" aria-label="Krishiv Vaid, home">
-        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
-          <path class="mark-stroke" d="M7 5v22M7 18.5 17.5 5M12.2 11.6 19.5 26.2 26.5 5" pathLength="1"/>
-          <circle class="mark-dot" cx="27.2" cy="25.6" r="1.8"/>
-        </svg>
+        <svg class="mark mark-top" viewBox="-33 -1072 1542 1111" aria-hidden="true"><path class="mark-glyph" d="M690 -740V-632H580V0H454V-158Q428 -119 384.5 -97.0Q341 -75 285 -75Q217 -75 165.5 -105.5Q114 -136 86.5 -190.0Q59 -244 59 -314Q59 -381 87.0 -434.0Q115 -487 166.5 -516.5Q218 -546 285 -546Q342 -546 385.0 -524.0Q428 -502 454 -463V-632H-21V-740ZM454 -309V-310Q454 -364 418.5 -403.0Q383 -442 319 -442Q261 -442 223.5 -406.0Q186 -370 186 -311Q186 -251 223.5 -214.5Q261 -178 319 -178Q362 -178 392.5 -197.0Q423 -216 438.5 -246.0Q454 -276 454 -309ZM578 -737H468Q405 -780 378.0 -795.0Q351 -810 325.0 -814.0Q299 -818 241 -818H191V-899H238Q294 -899 321.0 -895.5Q348 -892 375.5 -878.5Q403 -865 444 -833Q406 -901 375.0 -932.0Q344 -963 316.5 -970.5Q289 -978 243 -978H191V-1060H241Q321 -1060 362.5 -1042.5Q404 -1025 450.5 -960.0Q497 -895 578 -737ZM861 -301Q861 -246 894.0 -213.5Q927 -181 982 -181Q1027 -181 1059.5 -209.0Q1092 -237 1092 -289H1211V27H1085V-138Q1063 -109 1027.0 -93.5Q991 -78 945 -78Q885 -78 836.0 -104.0Q787 -130 758.0 -181.0Q729 -232 729 -305Q729 -380 763.5 -433.5Q798 -487 858.5 -514.0Q919 -541 996 -541H1046V-632H649V-740H1302L1301 -632H1176V-430H1009Q943 -430 902.0 -396.0Q861 -362 861 -301Z"/><circle class="mark-dot" cx="1411" cy="-75" r="84"/></svg>
         <span class="brand-name">krishiv vaid</span>
       </a>
       <nav class="nav" aria-label="Sections">
@@ -50,6 +62,7 @@
         <a href="#research">research</a>
         <a href="#projects">projects</a>
         <a href="#about">about</a>
+        <a class="wide-only" href="#interests">interests</a>
       </nav>
       <button class="theme" type="button" id="theme-toggle" aria-label="Switch theme">
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -64,7 +77,7 @@
   <main id="main" class="wrap">
     <section class="hero" aria-labelledby="hero-name">
       <p class="eyebrow mono"><span class="pulse" aria-hidden="true"></span>toronto, on <span class="sep">·</span> <time id="local-time">--:--</time></p>
-      <h1 id="hero-name">Krishiv Vaid</h1>
+      <h1 id="hero-name">Krishiv Vaid <span class="dev" lang="hi">कृषिव वैद</span></h1>
       <p class="lede">
         I study computer science &amp; statistics at
         <a class="org" href="https://uwaterloo.ca/"><img src="/public/logos/uwaterloo.ca.png" alt="" width="16" height="16">the University of Waterloo</a>.
@@ -106,7 +119,7 @@
         </li>
         <li class="entry">
           <div class="entry-head">
-            <span class="logo chip" aria-hidden="true">O</span>
+            <img class="logo" src="/public/logos/orangutany.png" alt="" width="28" height="28">
             <div class="entry-title">
               <h3>Orangutany</h3>
               <p class="role">Machine Learning Engineer</p>
@@ -144,7 +157,7 @@
         </li>
         <li class="entry">
           <div class="entry-head">
-            <span class="logo chip" aria-hidden="true">S</span>
+            <img class="logo round" src="/public/logos/steminate.png" alt="" width="28" height="28">
             <div class="entry-title">
               <h3>STEMinate</h3>
               <p class="role">Research Intern, Brain–Computer Interfaces</p>
@@ -196,7 +209,7 @@
       <dl class="facts">
         <div>
           <dt class="mono">education</dt>
-          <dd>B.Math at the <a href="https://uwaterloo.ca/">University of Waterloo</a>, intended double major in Computer Science and Statistics, expected 2029. President’s Scholarship of Distinction.</dd>
+          <dd>B.Math at the <a href="https://uwaterloo.ca/">University of Waterloo</a>, intended double major in Computer Science and Statistics. President’s Scholarship of Distinction.</dd>
         </div>
         <div>
           <dt class="mono">languages</dt>
@@ -215,26 +228,41 @@
           <dd>Git, GitHub Actions, Playwright, Storybook, pytest, ruff, ESLint</dd>
         </div>
       </dl>
+    </section>
 
-      <div class="offclock">
-        <p class="sub mono">off the clock</p>
-        <div class="stats">
-          <div class="stat"><span class="stat-n">2500</span><span class="stat-l mono">peak chess rating</span></div>
-          <div class="stat"><span class="stat-n">5.70<small>s</small></span><span class="stat-l mono">speedcubing pb</span></div>
+    <section id="interests" class="block reveal" aria-labelledby="interests-h">
+      <h2 id="interests-h" class="label mono"><span class="num">05</span>interests</h2>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-k mono">chess</span>
+          <span class="stat-n">2500</span>
+          <span class="stat-l">peak rating</span>
+          <span class="stat-note mono">playing since age 3</span>
         </div>
-        <p class="muted">Also poker, Dota 2, table tennis, hiking, and outdoor photography.</p>
+        <div class="stat">
+          <span class="stat-k mono">speedcubing</span>
+          <span class="stat-n">5.70<small>s</small></span>
+          <span class="stat-l">personal best solve</span>
+          <span class="stat-note mono">sub-6 seconds</span>
+        </div>
       </div>
+      <p class="sub mono">also into</p>
+      <ul class="pills">
+        <li>poker</li>
+        <li>dota 2</li>
+        <li>table tennis</li>
+        <li>hiking</li>
+        <li>outdoor photography</li>
+      </ul>
     </section>
   </main>
 
   <footer class="foot">
     <div class="wrap foot-inner">
       <div class="foot-row">
-        <a class="foot-brand" href="#main" aria-label="Back to top">
-          <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path class="mark-stroke static" d="M7 5v22M7 18.5 17.5 5M12.2 11.6 19.5 26.2 26.5 5"/><circle class="mark-dot" cx="27.2" cy="25.6" r="1.8"/></svg>
-          <span>© <span id="year">2026</span> Krishiv Vaid</span>
-        </a>
+        <p class="foot-copy">© <span id="year">2026</span> Krishiv Vaid <a class="totop mono" href="#main">top ↑</a></p>
         <p class="visits mono" id="visits" aria-live="polite">
+          <svg class="mark mark-foot" viewBox="-33 -1072 1542 1111" aria-hidden="true"><path class="mark-glyph" d="M690 -740V-632H580V0H454V-158Q428 -119 384.5 -97.0Q341 -75 285 -75Q217 -75 165.5 -105.5Q114 -136 86.5 -190.0Q59 -244 59 -314Q59 -381 87.0 -434.0Q115 -487 166.5 -516.5Q218 -546 285 -546Q342 -546 385.0 -524.0Q428 -502 454 -463V-632H-21V-740ZM454 -309V-310Q454 -364 418.5 -403.0Q383 -442 319 -442Q261 -442 223.5 -406.0Q186 -370 186 -311Q186 -251 223.5 -214.5Q261 -178 319 -178Q362 -178 392.5 -197.0Q423 -216 438.5 -246.0Q454 -276 454 -309ZM578 -737H468Q405 -780 378.0 -795.0Q351 -810 325.0 -814.0Q299 -818 241 -818H191V-899H238Q294 -899 321.0 -895.5Q348 -892 375.5 -878.5Q403 -865 444 -833Q406 -901 375.0 -932.0Q344 -963 316.5 -970.5Q289 -978 243 -978H191V-1060H241Q321 -1060 362.5 -1042.5Q404 -1025 450.5 -960.0Q497 -895 578 -737ZM861 -301Q861 -246 894.0 -213.5Q927 -181 982 -181Q1027 -181 1059.5 -209.0Q1092 -237 1092 -289H1211V27H1085V-138Q1063 -109 1027.0 -93.5Q991 -78 945 -78Q885 -78 836.0 -104.0Q787 -130 758.0 -181.0Q729 -232 729 -305Q729 -380 763.5 -433.5Q798 -487 858.5 -514.0Q919 -541 996 -541H1046V-632H649V-740H1302L1301 -632H1176V-430H1009Q943 -430 902.0 -396.0Q861 -362 861 -301Z"/><circle class="mark-dot" cx="1411" cy="-75" r="84"/></svg>
           <span class="visits-l">visitor</span>
           <span class="odo" aria-hidden="true"></span>
           <span class="sr" id="visits-sr"></span>

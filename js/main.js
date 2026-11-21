@@ -65,34 +65,10 @@
   setInterval(tick, 15000);
 
   /* ---------- visitor counter ----------
-     Every page load (including a reload) adds one visit. Off the real domain we
-     count into a separate key so local testing doesn't inflate the number. */
-  const COUNTER_BASE = 'https://abacus.jasoncameron.dev';
-  const COUNTER_NS = 'krishvaid.me';
-  const isProd = /(^|\.)krishvaid\.me$/.test(location.hostname);
-  const COUNTER_KEY = isProd ? 'visits' : 'visits-dev';
-
+     The request was already sent from <head> (window.__visit); this only renders it. */
   const visits = document.getElementById('visits');
   const odo = visits.querySelector('.odo');
   const visitsSr = document.getElementById('visits-sr');
-
-  const wait = ms => new Promise(r => setTimeout(r, ms));
-  async function readCount(path) {
-    const res = await fetch(`${COUNTER_BASE}/${path}/${COUNTER_NS}/${COUNTER_KEY}`, { cache: 'no-store', credentials: 'omit' });
-    const data = await res.json();
-    if (!Number.isSafeInteger(data.value) || data.value < 0) throw new Error('bad count');
-    return data.value;
-  }
-  async function countVisit() {
-    // The hit endpoint occasionally errors after it has already incremented,
-    // so retry with read-only calls instead of hitting twice.
-    try { return await readCount('hit'); } catch (e) {}
-    for (let i = 0; i < 4; i++) {
-      await wait(400 * 2 ** i);
-      try { return await readCount('get'); } catch (e) {}
-    }
-    throw new Error('counter unavailable');
-  }
 
   function renderOdometer(n) {
     const text = n.toLocaleString('en-US');
@@ -112,22 +88,17 @@
     visitsSr.textContent = `You are visitor number ${text}.`;
     requestAnimationFrame(() => requestAnimationFrame(() => {
       reels.forEach(([reel, digit], i) => {
-        reel.style.transitionDelay = `${i * 70}ms`;
+        reel.style.transitionDelay = `${i * 40}ms`;
         reel.style.transform = `translateY(-${digit}em)`;
       });
     }));
   }
 
-  function startCounter() {
-    odo.classList.add('loading');
-    odo.textContent = '#···';
-    countVisit().then(renderOdometer).catch(() => {
-      visits.classList.add('hidden');
-    });
-  }
-  // A prerendered page hasn't been visited yet; count it once it's shown.
-  if (document.prerendering) document.addEventListener('prerenderingchange', startCounter, { once: true });
-  else startCounter();
+  odo.classList.add('loading');
+  odo.textContent = '#···';
+  Promise.resolve(window.__visit)
+    .then(n => { if (!Number.isSafeInteger(n) || n < 1) throw new Error('bad count'); renderOdometer(n); })
+    .catch(() => visits.classList.add('hidden'));
 
   /* ---------- double pendulum ---------- */
   const canvas = document.getElementById('pendulum');

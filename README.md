@@ -14,8 +14,9 @@ python3 -m http.server 8000   # then open http://localhost:8000
 | --- | --- |
 | `index.html` | All page content: hero, work, research, projects, about |
 | `css/styles.css` | Design tokens (light and dark) at the top, then components |
-| `js/main.js` | Theme toggle, scroll reveal, Toronto clock, visitor counter, double-pendulum canvas |
-| `public/favicon.svg` | The **KV.** mark. The K's leg runs into the V, with an accent dot |
+| `js/main.js` | Theme toggle, scroll reveal, Toronto clock, visitor-counter display, double-pendulum canvas |
+| `public/favicon.svg` | The **वैद.** mark: वैद set in Poppins SemiBold and converted to an SVG path, plus the blue accent dot |
+| `counter/` | Cloudflare Worker behind the visitor counter |
 | `public/logos/` | Small org logos used inline |
 | `404.html` | Not-found page |
 | `experience.html`, `projects.html`, … | Redirects so old URLs still land on the right section |
@@ -28,12 +29,17 @@ The theme follows the system setting until the visitor clicks the toggle. After 
 
 ## Visitor counter
 
-Every page load, including a reload, adds one visit. The counter uses the free [Abacus](https://abacus.jasoncameron.dev) API, with no account or server to run:
+Every page load, including a reload, adds one visit. The counter runs on a Cloudflare Worker (`counter/`), with a single Durable Object holding the count, so increments are atomic and a request takes about 50 ms.
 
-- production key: `krishvaid.me/visits` (used only when served from krishvaid.me)
-- any other host (for example localhost) counts into `krishvaid.me/visits-dev`, so testing doesn't inflate the real number
+- The request is sent from an inline script in `<head>` (`window.__visit`), so it doesn't wait for CSS, fonts or `main.js`. `main.js` only renders the result.
+- Only krishvaid.me can bump the real count. Pages served from localhost count into a separate `dev` counter, and any other origin gets a 403.
+- `START_COUNT` in `counter/wrangler.toml` was the count carried over when the counter launched. It's used only once, while storage is empty.
 
-Abacus sometimes returns an error even though it already counted the hit. In that case the script retries with read-only `get` calls, never with a second `hit`. If the counter can't be reached at all, it hides itself.
+Deploy changes to the worker with:
+
+```sh
+cd counter && npx wrangler deploy
+```
 
 ## Deploy
 

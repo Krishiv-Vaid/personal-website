@@ -1,0 +1,16 @@
+name = "krishvaid-visits"
+main = "worker.mjs"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[vars]
+# Visits already counted before this worker existed; used once, when storage is empty.
+START_COUNT = "1670"
+
+[[durable_objects.bindings]]
+name = "COUNTER"
+class_name = "PageCounter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["PageCounter"]
