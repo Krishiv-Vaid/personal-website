@@ -211,6 +211,9 @@ cite { font-style: italic; font-family: var(--serif); font-size: 1.08em; color: 
 .project h3 { font-size: 17px; }
 .badge { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; color: var(--muted); padding: 3px 9px 3px 8px; border: 1px solid var(--line); border-radius: 999px; }
 .badge .pulse { width: 6px; height: 6px; }
+.badge-win { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); background: var(--accent-soft); }
+.badge-win svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.project .tags .live { margin-left: 14px; color: var(--fg); }
 .has-viz { display: grid; grid-template-columns: 1fr 168px; gap: 24px; align-items: center; }
 .viz { position: relative; aspect-ratio: 1; border-radius: 12px; background: var(--bg-raised); overflow: hidden; }
 .viz canvas { width: 100%; height: 100%; }
