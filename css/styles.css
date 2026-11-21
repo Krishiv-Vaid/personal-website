@@ -153,7 +153,7 @@ h1 {
 .org img { width: 16px; height: 16px; border-radius: 4px; align-self: center; transform: translateY(-1px); }
 
 .status { margin-top: 32px; display: grid; gap: 10px; font-size: 15px; }
-.status li { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: baseline; }
+.status li { display: grid; grid-template-columns: 88px 1fr; gap: 12px; align-items: baseline; }
 .status .k { font-size: 12px; color: var(--faint); text-transform: lowercase; }
 
 .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; font-size: 13px; }
@@ -251,13 +251,12 @@ cite { font-style: italic; font-family: var(--serif); font-size: 1.08em; color: 
 
 /* ---------- footer ---------- */
 .foot { border-top: 1px solid var(--line); margin-top: 24px; }
-.foot-inner { padding-top: 28px; padding-bottom: 40px; }
+.foot-inner { padding-top: 28px; padding-bottom: 36px; }
 .foot-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .foot-copy { font-size: 14px; color: var(--muted); }
 .totop { margin-left: 14px; font-size: 12px; color: var(--faint) !important; }
 .totop:hover { color: var(--fg) !important; }
 .mark-foot { width: 25px; height: 18px; }
-.colophon { margin-top: 18px; font-size: 11px; color: var(--faint); }
 
 .visits { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); min-height: 30px; }
 .visits.hidden { visibility: hidden; }
