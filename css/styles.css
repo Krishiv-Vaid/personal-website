@@ -263,6 +263,16 @@ cite { font-style: italic; font-family: var(--serif); font-size: 1.08em; color: 
 }
 .heart svg { width: 12px; height: 12px; fill: var(--love); animation: beat 0.9s var(--ease) 0.55s 1; }
 .heart:hover svg { animation: beat 0.9s var(--ease) infinite; }
+.loves { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 4px; vertical-align: 0.08em; }
+.loves .heart { margin-left: 0; vertical-align: baseline; }
+/* i ♥ c++: blue-black pill with the C++ hexagon, dancing a beat after the math one */
+.heart-cpp {
+  color: #d6e4ff; background: #0f1a2e; box-shadow: inset 0 0 0 1px #24385c;
+  padding-left: 7px; animation-delay: 0.62s;
+}
+.heart-cpp svg:not(.cpp-logo) { fill: #ff6b6b; animation-delay: 0.78s; }
+.heart-cpp .cpp-logo { width: 13px; height: 14.6px; margin-right: 1px; animation: none; }
+:root[data-theme="dark"] .heart-cpp { background: #12213b; box-shadow: inset 0 0 0 1px #2b4470; }
 @keyframes dance {
   0%, 100% { transform: none; }
   10% { transform: translateY(-6px) rotate(-7deg); }
