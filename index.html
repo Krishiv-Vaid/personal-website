@@ -30,7 +30,7 @@
   <!-- Count the visit before CSS and fonts load; main.js renders the result. -->
   <script>
     window.__visit = (function () {
-      var url = 'COUNTER_URL';
+      var url = 'https://krishvaid-visits.vvaid365.workers.dev/visits';
       function go(retry) {
         return fetch(url, { method: 'POST', credentials: 'omit', cache: 'no-store' })
           .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
