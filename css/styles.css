@@ -264,14 +264,14 @@ cite { font-style: italic; font-family: var(--serif); font-size: 1.08em; color: 
 .heart svg { width: 12px; height: 12px; fill: var(--love); animation: beat 0.9s var(--ease) 0.55s 1; }
 .heart:hover svg { animation: beat 0.9s var(--ease) infinite; }
 .loves { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 4px; vertical-align: 0.08em; }
-.loves .heart { margin-left: 0; vertical-align: baseline; }
+.loves .heart { margin-left: 0; vertical-align: baseline; min-width: 82px; justify-content: center; }
 /* i ♥ <C++ logo>: soft periwinkle pill, dancing a beat after the math one */
 .heart-cpp {
   color: #5047c8; background: #ecebff; box-shadow: inset 0 0 0 1px rgba(108, 99, 255, 0.28);
-  padding-right: 6px; animation-delay: 0.62s;
+  animation-delay: 0.62s;
 }
 .heart-cpp svg:not(.cpp-logo) { fill: var(--love); animation-delay: 0.78s; }
-.heart-cpp .cpp-logo { width: 18px; height: 20.2px; margin: -3px 0 -3px 2px; animation: none; }
+.heart-cpp .cpp-logo { width: 20px; height: 22.5px; margin: -4px 0 -4px 3px; animation: none; }
 :root[data-theme="dark"] .heart-cpp { color: #c3bfff; background: rgba(138, 128, 255, 0.15); box-shadow: inset 0 0 0 1px rgba(150, 140, 255, 0.32); }
 @keyframes dance {
   0%, 100% { transform: none; }
