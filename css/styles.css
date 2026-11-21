@@ -10,10 +10,10 @@
   --accent: #2f4fd6;
   --accent-soft: rgba(47, 79, 214, 0.1);
   --live: #1f9d55;
-  --love: #e5383b;
+  --love: #e0242b;
   --love-ink: #b42331;
-  --love-bg: #fdeeed;
-  --love-line: rgba(229, 56, 59, 0.22);
+  --love-bg: #fde8e8;
+  --love-line: rgba(224, 36, 43, 0.28);
   --header-bg: rgba(247, 246, 242, 0.78);
 
   --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
@@ -253,12 +253,21 @@ cite { font-style: italic; font-family: var(--serif); font-size: 1.08em; color: 
 .interests-lede { font-size: 16px; color: var(--fg-2); margin-bottom: 20px; max-width: 60ch; }
 .heart {
   display: inline-flex; align-items: center; gap: 5px; margin-left: 4px; padding: 1px 10px 2px;
-  font-size: 13px; line-height: 1.6; color: var(--love-ink); white-space: nowrap;
+  font-size: 13px; line-height: 1.6; color: var(--love); white-space: nowrap;
   background: var(--love-bg); box-shadow: inset 0 0 0 1px var(--love-line);
   border-radius: 999px; vertical-align: 0.08em; cursor: default;
+  /* a couple of small hops once the hero has settled, then it stays put */
+  animation: hop 1.1s var(--ease) 1s both;
 }
-.heart svg { width: 12px; height: 12px; fill: var(--love); animation: beat 1.4s var(--ease) 1.2s 2; }
+.heart svg { width: 12px; height: 12px; fill: var(--love); }
 .heart:hover svg { animation: beat 0.9s var(--ease) infinite; }
+@keyframes hop {
+  0%, 100% { transform: translateY(0); }
+  18% { transform: translateY(-7px); }
+  36% { transform: translateY(0); }
+  52% { transform: translateY(-3px); }
+  68% { transform: translateY(0); }
+}
 @keyframes beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(0.95); } 45% { transform: scale(1.18); } }
 
 /* ---------- footer ---------- */
