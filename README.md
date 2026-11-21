@@ -15,7 +15,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 | `index.html` | All page content: hero, work, research, projects, about |
 | `css/styles.css` | Design tokens (light and dark) at the top, then components |
 | `js/main.js` | Theme toggle, scroll reveal, Toronto clock, visitor-counter display, double-pendulum canvas |
-| `public/favicon.svg` | The **वैद.** mark: वैद set in Poppins SemiBold and converted to an SVG path, plus the blue accent dot |
+| `public/vaid-icon.svg` | The **वैद.** mark: वैद set in Poppins SemiBold and converted to an SVG path, plus the blue accent dot |
 | `counter/` | Cloudflare Worker behind the visitor counter |
 | `public/logos/` | Small org logos used inline |
 | `404.html` | Not-found page |

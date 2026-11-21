@@ -223,19 +223,22 @@ cite { font-style: italic; font-family: var(--serif); font-size: 1.08em; color: 
 .facts dd { font-size: 15px; color: var(--fg-2); }
 
 .sub { font-size: 12px; color: var(--faint); margin-bottom: 14px; }
-.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px; }
 .stat {
-  position: relative; padding: 20px 22px 18px; border: 1px solid var(--line); border-radius: 16px;
-  display: flex; flex-direction: column; gap: 4px; transition: border-color 0.25s;
+  display: flex; align-items: center; gap: 16px; padding: 14px 18px;
+  border: 1px solid var(--line); border-radius: 14px; transition: border-color 0.25s;
 }
 .stat:hover { border-color: var(--faint); }
-.stat-k { font-size: 12px; color: var(--accent); margin-bottom: 14px; }
-.stat-n { font: 400 52px/1 var(--serif); letter-spacing: -0.035em; color: var(--fg); font-variant-numeric: tabular-nums; }
-.stat-n small { font-size: 0.45em; color: var(--muted); margin-left: 3px; letter-spacing: 0; }
-.stat-l { font-size: 14px; color: var(--fg-2); margin-top: 8px; }
-.stat-note { font-size: 12px; color: var(--muted); }
+.stat-n { font: 400 32px/1 var(--serif); letter-spacing: -0.03em; color: var(--fg); font-variant-numeric: tabular-nums; flex: none; }
+.stat-n small { font-size: 0.5em; color: var(--muted); margin-left: 2px; letter-spacing: 0; }
+.stat-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat-k { font-size: 12px; color: var(--accent); }
+.stat-l { font-size: 13px; color: var(--muted); line-height: 1.4; }
 .pills { display: flex; flex-wrap: wrap; gap: 8px; }
-.pills li { font-size: 14px; color: var(--fg-2); padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; }
+.pills li { font-size: 14px; color: var(--fg-2); padding: 5px 13px; border: 1px solid var(--line); border-radius: 999px; }
+.pills-focus { margin-bottom: 36px; }
+.pills-focus li { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); background: var(--accent-soft); color: var(--fg); }
+.heart { font-size: 0.82em; color: var(--accent); white-space: nowrap; margin-left: 2px; }
 
 /* ---------- footer ---------- */
 .foot { border-top: 1px solid var(--line); margin-top: 24px; }
@@ -290,7 +293,6 @@ cite { font-style: italic; font-family: var(--serif); font-size: 1.08em; color: 
   .viz { max-width: 200px; }
   .facts > div { grid-template-columns: 1fr; gap: 2px; }
   .stats { grid-template-columns: 1fr; }
-  .stat-n { font-size: 44px; }
 }
 
 @media (max-width: 600px) { .wide-only { display: none; } }
